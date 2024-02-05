@@ -3,7 +3,7 @@ import { SumarryContainer, SummaryCard } from './styles'
 
 export function Summary() {
   return (
-    <SumarryContainer>
+    <SumarryContainer className="layoutContainer">
       <SummaryCard>
         <header>
           <span>Entradas</span>

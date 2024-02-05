@@ -4,7 +4,7 @@ import logo from '../../assets/logo.svg'
 export function Header() {
   return (
     <HeaderContainer>
-      <HeaderContent>
+      <HeaderContent className="layoutContainer">
         <img src={logo} alt="" />
         <NewTransactionButton>Nova transação</NewTransactionButton>
       </HeaderContent>

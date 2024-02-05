@@ -22,4 +22,10 @@ export const GlobalStyle = createGlobalStyle`
   body, input, textarea, button{
     font: 400 1rem Roboto, sans-serif;
   }
+
+  .layoutContainer{
+    width: 100%;
+    max-width: 1120px;
+    padding: 0 1.5rem;
+  }
 `
