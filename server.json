@@ -4,8 +4,8 @@
       "id": 1,
       "description": "Desenvolvimento de site",
       "type": "income",
-      "category": "enterada",
-      "value": 14000,
+      "category": "Trabalho",
+      "price": 14000,
       "createdAt": "'2024-02-08T20:37:33.748Z'"
 
     },
@@ -13,8 +13,8 @@
       "id": 2,
       "description": "Jantar",
       "type": "outcome",
-      "category": "Saida",
-      "value": 50,
+      "category": "Alimentação",
+      "price": 90,
       "createdAt": "'2024-02-08T20:37:33.748Z'"
 
     }
