@@ -6,7 +6,7 @@
       "type": "income",
       "category": "Trabalho",
       "price": 14000,
-      "createdAt": "'2024-02-08T20:37:33.748Z'"
+      "createdAt": "2024-02-08T20:37:33.748Z"
 
     },
     {
@@ -15,7 +15,7 @@
       "type": "outcome",
       "category": "Alimentação",
       "price": 90,
-      "createdAt": "'2024-02-08T20:37:33.748Z'"
+      "createdAt": "2024-02-08T20:37:33.748Z"
 
     },
     {
@@ -24,7 +24,7 @@
       "type": "outcome",
       "category": "Alimentação",
       "price": 50,
-      "createdAt": "'2024-02-08T20:37:33.748Z'"
+      "createdAt": "2024-02-08T20:37:33.748Z"
 
     },
     {
@@ -33,7 +33,7 @@
       "type": "income",
       "category": "trabalho",
       "price": 5000,
-      "createdAt": "'2024-02-08T20:37:33.748Z'"
+      "createdAt": "2024-02-08T20:37:33.748Z"
 
     }
   ]
