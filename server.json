@@ -7,7 +7,6 @@
       "category": "Trabalho",
       "price": 14000,
       "createdAt": "2024-02-08T20:37:33.748Z"
-
     },
     {
       "id": 2,
@@ -16,7 +15,6 @@
       "category": "Alimentação",
       "price": 90,
       "createdAt": "2024-02-08T20:37:33.748Z"
-
     },
     {
       "id": 3,
@@ -25,7 +23,6 @@
       "category": "Alimentação",
       "price": 50,
       "createdAt": "2024-02-08T20:37:33.748Z"
-
     },
     {
       "id": 4,
@@ -34,7 +31,30 @@
       "category": "trabalho",
       "price": 5000,
       "createdAt": "2024-02-08T20:37:33.748Z"
-
+    },
+    {
+      "description": "teste",
+      "price": 100,
+      "category": "teste",
+      "type": "income",
+      "createdAt": "2024-02-11T22:43:43.538Z",
+      "id": 5
+    },
+    {
+      "description": "PC",
+      "price": 5000,
+      "category": "Jobs",
+      "type": "outcome",
+      "createdAt": "2024-02-11T23:08:26.554Z",
+      "id": 6
+    },
+    {
+      "description": "Contratação dev",
+      "price": 5000,
+      "category": "Empreitada",
+      "type": "outcome",
+      "createdAt": "2024-02-11T23:10:17.137Z",
+      "id": 7
     }
   ]
 }
