@@ -33,6 +33,7 @@ export function TransactionsProvider({ children }: TransactionsProviderProps) {
   const [transactions, setTransactions] = useState<Transactions[]>([])
 
   async function fetchTransactions(query?: string) {
+    console.log(query)
     const response = await api.get('/transactions', {
       params: {
         _sort: 'createdAt',
@@ -40,7 +41,6 @@ export function TransactionsProvider({ children }: TransactionsProviderProps) {
         q: query,
       },
     })
-
     setTransactions(response.data)
   }
 
@@ -59,7 +59,11 @@ export function TransactionsProvider({ children }: TransactionsProviderProps) {
 
   return (
     <TransactionsContext.Provider
-      value={{ transactions, fetchTransactions, createTransactions }}
+      value={{
+        transactions,
+        fetchTransactions,
+        createTransactions,
+      }}
     >
       {children}
     </TransactionsContext.Provider>
