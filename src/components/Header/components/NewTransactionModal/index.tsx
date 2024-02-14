@@ -12,6 +12,7 @@ import { Controller, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { TransactionsContext } from '../../../../contexts/TransactionsContext'
 import { useContextSelector } from 'use-context-selector'
+import { ModalContext } from '../../../../contexts/ModalContext'
 
 const newTransitionFormSchema = z.object({
   description: z.string(),
@@ -23,6 +24,9 @@ const newTransitionFormSchema = z.object({
 type newTransactionFormInput = z.infer<typeof newTransitionFormSchema>
 
 export function NewTransactionModal() {
+  const closeModalTransaction = useContextSelector(ModalContext, (context) => {
+    return context.closeModalNewTransaction
+  })
   const createTransactions = useContextSelector(
     TransactionsContext,
     (context) => {
@@ -44,14 +48,15 @@ export function NewTransactionModal() {
       ...data,
     })
     reset()
+    closeModalTransaction()
   }
 
   return (
     <Dialog.Portal>
-      <Overlay />
+      <Overlay onClick={closeModalTransaction} />
       <Content>
         <Dialog.Title>Nova Transação</Dialog.Title>
-        <CloseButton>
+        <CloseButton onClick={closeModalTransaction}>
           <X size={24} />
         </CloseButton>
         <form onSubmit={handleSubmit(handleCreateNewTransaction)}>
