@@ -5,6 +5,11 @@ export const SumarryContainer = styled.section`
   grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
   margin: -5rem auto 0;
+
+  @media screen and (max-width: 991px) {
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
 `
 
 interface SumarryCardProps {

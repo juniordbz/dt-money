@@ -26,12 +26,15 @@ interface TransactionsContextType {
   transactions: Transactions[]
   fetchTransactions: (query?: string) => Promise<void>
   createTransactions: (data: CreateNewTransactionProps) => Promise<void>
+  quantityTransactions: number
 }
 
 export const TransactionsContext = createContext({} as TransactionsContextType)
 
 export function TransactionsProvider({ children }: TransactionsProviderProps) {
   const [transactions, setTransactions] = useState<Transactions[]>([])
+
+  const quantityTransactions = transactions.length
 
   const fetchTransactions = useCallback(async (query?: string) => {
     const response = await api.get('/transactions', {
@@ -66,6 +69,7 @@ export function TransactionsProvider({ children }: TransactionsProviderProps) {
         transactions,
         fetchTransactions,
         createTransactions,
+        quantityTransactions,
       }}
     >
       {children}

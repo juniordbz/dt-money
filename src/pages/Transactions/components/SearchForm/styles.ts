@@ -1,7 +1,27 @@
 import styled from 'styled-components'
 
-export const SearchFormContainer = styled.form`
+export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
   margin: 4rem auto 0;
+
+  > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    span {
+      color: ${({ theme }) => theme['gray-500']};
+    }
+
+    p {
+      color: ${({ theme }) => theme['gray-300']};
+    }
+  }
+`
+
+export const SearchFormContainer = styled.form`
   display: flex;
   gap: 1rem;
 
@@ -45,6 +65,12 @@ export const SearchFormContainer = styled.form`
         background-color 0.2s,
         color 0.2s,
         border-color 0.2s;
+    }
+
+    @media screen and (max-width: 991px) {
+      p {
+        display: none;
+      }
     }
   }
 `

@@ -27,5 +27,17 @@ export const GlobalStyle = createGlobalStyle`
     width: 100%;
     max-width: 1120px;
     padding: 0 1.5rem;
+
+    @media screen and (max-width:991px){
+      max-width: 991px;
+    }
   }
+
+  ::-webkit-inner-spin-button,
+  ::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+
 `

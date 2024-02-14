@@ -32,3 +32,40 @@ export const PriceHighlight = styled.span<PriceHighlightProps>`
   color: ${({ theme, variant }) =>
     variant === 'income' ? theme['green-300'] : theme['red-300']};
 `
+
+// cards para o mobile
+
+export const CardContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  border-radius: 6px;
+
+  width: 100%;
+  background: ${({ theme }) => theme['gray-700']};
+  padding: 1.5rem;
+  margin-top: 1rem;
+
+  span {
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
+
+  > div:first-child {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+`
+
+export const CardFooter = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  div {
+    display: flex;
+    gap: 0.5rem;
+    color: ${({ theme }) => theme['gray-500']};
+  }
+`

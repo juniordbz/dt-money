@@ -20,6 +20,14 @@ export const Content = styled(Dialog.Content)`
   left: 50%;
   transform: translate(-50%, -50%);
 
+  @media screen and (max-width: 991px) {
+    position: absolute;
+    bottom: -25%;
+    right: 0;
+    min-width: 100%;
+    height: auto;
+  }
+
   form {
     margin-top: 2rem;
 
