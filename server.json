@@ -1,3 +1,12 @@
 {
-  "transactions": []
+  "transactions": [
+    {
+      "description": "sdfg",
+      "price": 2,
+      "category": "232",
+      "type": "income",
+      "createdAt": "2024-02-15T22:12:21.323Z",
+      "id": 1
+    }
+  ]
 }
