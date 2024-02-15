@@ -8,32 +8,15 @@ import {
 import { TransactionsContext } from '../../../../contexts/TransactionsContext'
 import { dateFormatter, priceFormatter } from '../../../../utils/formatter'
 import { useContextSelector } from 'use-context-selector'
-import { useEffect, useState } from 'react'
+import { useState, useEffect } from 'react'
 import { CalendarBlank, TagSimple } from 'phosphor-react'
 import * as Dialog from '@radix-ui/react-dialog'
 import { UpdateModal } from './components/UpdateModal'
-import { ModalContext } from '../../../../contexts/ModalContext'
 
 export function TableTransactions() {
-  const [selectedTransactionId, setSelectedTransactionId] = useState(0)
-
-  const openUpdateTranction = useContextSelector(ModalContext, (context) => {
-    return context.openUpdateTranction
-  })
-  const openModalUpdateTransaction = useContextSelector(
-    ModalContext,
-    (context) => {
-      return context.openModalUpdateTransaction
-    },
-  )
-
   const transactions = useContextSelector(TransactionsContext, (context) => {
     return context.transactions
   })
-
-  function handleIDTransactionClick(id: number) {
-    setSelectedTransactionId(id)
-  }
 
   const [screenWidth, setScreenWidth] = useState(window.innerWidth)
 
