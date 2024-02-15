@@ -21,18 +21,41 @@ const newTransitionFormSchema = z.object({
   type: z.enum(['income', 'outcome']),
 })
 
-type newTransactionFormInput = z.infer<typeof newTransitionFormSchema>
+export type newTransactionFormInput = z.infer<typeof newTransitionFormSchema>
 
 export function NewTransactionModal() {
   const closeModalTransaction = useContextSelector(ModalContext, (context) => {
     return context.closeModalNewTransaction
   })
+
+  const controlUpdateTransaction = useContextSelector(
+    ModalContext,
+    (context) => {
+      return context.controlUpdateTransaction
+    },
+  )
+
+  const handleControlUpdateTransacion = useContextSelector(
+    ModalContext,
+    (context) => {
+      return context.handleControlUpdateTransacion
+    },
+  )
+
   const createTransactions = useContextSelector(
     TransactionsContext,
     (context) => {
       return context.createTransactions
     },
   )
+
+  const UpdateTransactions = useContextSelector(
+    TransactionsContext,
+    (context) => {
+      return context.UpdateTransactions
+    },
+  )
+
   const {
     control,
     register,
@@ -47,6 +70,7 @@ export function NewTransactionModal() {
     await createTransactions({
       ...data,
     })
+
     reset()
     closeModalTransaction()
   }
@@ -66,6 +90,7 @@ export function NewTransactionModal() {
             required
             {...register('description')}
           />
+
           <input
             type="number"
             placeholder="Preço"
@@ -101,8 +126,12 @@ export function NewTransactionModal() {
             }}
           />
 
-          <button type="submit" disabled={isSubmitting}>
-            Cadastrar
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            onClick={() => handleControlUpdateTransacion(false)}
+          >
+            {controlUpdateTransaction === false ? 'Cadastrar' : 'Atualizar'}
           </button>
         </form>
       </Content>

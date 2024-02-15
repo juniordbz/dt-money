@@ -7,12 +7,6 @@ import { ModalContext } from '../../../../../../contexts/ModalContext'
 interface UpdateModalProps {
   idProp: number
 }
-interface UpdateTransactionsProps {
-  description: string
-  type: 'income' | 'outcome'
-  price: number
-  category: string
-}
 
 export function UpdateModal({ idProp }: UpdateModalProps) {
   const closeModalUpdateTransaction = useContextSelector(
@@ -21,26 +15,38 @@ export function UpdateModal({ idProp }: UpdateModalProps) {
       return context.closeModalUpdateTransaction
     },
   )
+  const openModalNewTransaction = useContextSelector(
+    ModalContext,
+    (context) => {
+      return context.openModalNewTransaction
+    },
+  )
+  const handleControlUpdateTransacion = useContextSelector(
+    ModalContext,
+    (context) => {
+      return context.handleControlUpdateTransacion
+    },
+  )
   const deleteTransactions = useContextSelector(
     TransactionsContext,
     (context) => {
       return context.deleteTransactions
     },
   )
-  const UpdateTransactions = useContextSelector(
-    TransactionsContext,
-    (context) => {
-      return context.UpdateTransactions
-    },
-  )
+  const getID = useContextSelector(TransactionsContext, (context) => {
+    return context.getID
+  })
 
   function handleDeleteTransactions(id: number) {
     deleteTransactions(id)
     closeModalUpdateTransaction()
   }
-  function handleEditTransactions(data: UpdateTransactionsProps) {
-    UpdateTransactions(...data)
+  function handleEditTransactions(id: number) {
     closeModalUpdateTransaction()
+    openModalNewTransaction()
+    handleControlUpdateTransacion(true)
+    console.log(id)
+    getID(id)
   }
 
   return (
@@ -49,7 +55,7 @@ export function UpdateModal({ idProp }: UpdateModalProps) {
       <Content>
         <Dialog.Title>O que você deseja fazer com essa transação?</Dialog.Title>
         <div>
-          <ActionButton onClick={() => handleEditTransactions(data)}>
+          <ActionButton onClick={() => handleEditTransactions(idProp)}>
             Editar
           </ActionButton>
           <ActionButton onClick={() => handleDeleteTransactions(idProp)}>

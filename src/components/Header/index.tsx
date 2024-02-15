@@ -9,6 +9,13 @@ export function Header() {
   const openNewTransaction = useContextSelector(ModalContext, (context) => {
     return context.openNewTransaction
   })
+
+  const handleControlUpdateTransacion = useContextSelector(
+    ModalContext,
+    (context) => {
+      return context.handleControlUpdateTransacion
+    },
+  )
   const openModalNewTransaction = useContextSelector(
     ModalContext,
     (context) => {
@@ -25,7 +32,11 @@ export function Header() {
           onOpenChange={openModalNewTransaction}
         >
           <Dialog.Trigger asChild>
-            <NewTransactionButton>Nova transação</NewTransactionButton>
+            <NewTransactionButton
+              onClick={() => handleControlUpdateTransacion(false)}
+            >
+              Nova transação
+            </NewTransactionButton>
           </Dialog.Trigger>
           <NewTransactionModal />
         </Dialog.Root>

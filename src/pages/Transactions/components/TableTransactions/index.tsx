@@ -8,23 +8,15 @@ import {
 import { TransactionsContext } from '../../../../contexts/TransactionsContext'
 import { dateFormatter, priceFormatter } from '../../../../utils/formatter'
 import { useContextSelector } from 'use-context-selector'
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { CalendarBlank, TagSimple } from 'phosphor-react'
 import * as Dialog from '@radix-ui/react-dialog'
 import { UpdateModal } from './components/UpdateModal'
 import { ModalContext } from '../../../../contexts/ModalContext'
 
-interface UpdateTransactionProps {
-  description: string
-  type: 'income' | 'outcome'
-  price: number
-  category: string
-}
-
 export function TableTransactions() {
   const [selectedTransactionId, setSelectedTransactionId] = useState(0)
-  const [updateTransactionId, setUpdateTransactionId] =
-    useState<UpdateTransactionProps>({})
+
   const openUpdateTranction = useContextSelector(ModalContext, (context) => {
     return context.openUpdateTranction
   })
@@ -39,12 +31,8 @@ export function TableTransactions() {
     return context.transactions
   })
 
-  function handleTransactionClick(id: number) {
+  function handleIDTransactionClick(id: number) {
     setSelectedTransactionId(id)
-  }
-
-  function handleUpdateTransactionClick(data: UpdateTransactionProps) {
-    setUpdateTransactionId()
   }
 
   const [screenWidth, setScreenWidth] = useState(window.innerWidth)
@@ -74,7 +62,7 @@ export function TableTransactions() {
                 <Dialog.Trigger
                   asChild
                   key={transaction.id}
-                  onClick={() => handleTransactionClick(transaction.id)}
+                  onClick={() => handleIDTransactionClick(transaction.id)}
                 >
                   <CardContainer>
                     <div>
@@ -107,7 +95,7 @@ export function TableTransactions() {
                   <Dialog.Trigger
                     asChild
                     key={transaction.id}
-                    onClick={() => handleTransactionClick(transaction.id)}
+                    onClick={() => handleIDTransactionClick(transaction.id)}
                   >
                     <tr>
                       <td width="50%">{transaction.description}</td>
@@ -128,7 +116,7 @@ export function TableTransactions() {
             </tbody>
           </TransactionsTable>
         )}
-        <UpdateModal idProp={selectedTransactionId} updateData={transactions} />
+        <UpdateModal idProp={selectedTransactionId} />
       </Dialog.Root>
     </TableTransactionsContainer>
   )

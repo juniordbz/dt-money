@@ -8,6 +8,8 @@ interface ModalContextType {
   openUpdateTranction: boolean
   openModalUpdateTransaction: () => void
   closeModalUpdateTransaction: () => void
+  handleControlUpdateTransacion: (value: boolean) => void
+  controlUpdateTransaction: boolean
 }
 
 interface TransactionsProviderProps {
@@ -17,12 +19,22 @@ interface TransactionsProviderProps {
 export const ModalContext = createContext({} as ModalContextType)
 
 export function ModalProvider({ children }: TransactionsProviderProps) {
+  const [controlUpdateTransaction, setControlUpdateTransaction] =
+    useState(false)
+
+  const handleControlUpdateTransacion = (value: boolean) =>
+    setControlUpdateTransaction(value)
+
+  // controle de abertura dos modais
   const [openNewTransaction, setOpenNewTransaction] = useState(false)
   const [openUpdateTranction, setOpenUpdateTransaction] = useState(false)
   const openModalNewTransaction = () => setOpenNewTransaction(true)
   const closeModalNewTransaction = () => setOpenNewTransaction(false)
   const openModalUpdateTransaction = () => setOpenUpdateTransaction(true)
-  const closeModalUpdateTransaction = () => setOpenUpdateTransaction(false)
+  const closeModalUpdateTransaction = () => {
+    setControlUpdateTransaction(false)
+    setOpenUpdateTransaction(false)
+  }
 
   return (
     <ModalContext.Provider
@@ -33,6 +45,8 @@ export function ModalProvider({ children }: TransactionsProviderProps) {
         openUpdateTranction,
         openModalUpdateTransaction,
         closeModalUpdateTransaction,
+        handleControlUpdateTransacion,
+        controlUpdateTransaction,
       }}
     >
       {children}

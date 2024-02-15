@@ -21,14 +21,22 @@ interface CreateNewTransactionProps {
   price: number
   category: string
 }
+interface UpdateTransactionProps {
+  id: number
+  description: string
+  type: 'income' | 'outcome'
+  price: number
+  category: string
+}
 
 interface TransactionsContextType {
   transactions: Transactions[]
   fetchTransactions: (query?: string) => Promise<void>
   createTransactions: (data: CreateNewTransactionProps) => Promise<void>
   deleteTransactions: (id: number) => Promise<void>
-  UpdateTransactions: (data: CreateNewTransactionProps) => Promise<void>
+  UpdateTransactions: (data: UpdateTransactionProps) => Promise<void>
   quantityTransactions: number
+  getID: (id: number) => Promise<void>
 }
 
 export const TransactionsContext = createContext({} as TransactionsContextType)
@@ -61,9 +69,13 @@ export function TransactionsProvider({ children }: TransactionsProviderProps) {
     [],
   )
 
+  const getID = useCallback(async (id: number) => {
+    const response = await api.get(`transactions/${id}`)
+  }, [])
+
   const UpdateTransactions = useCallback(
-    async (data: CreateNewTransactionProps) => {
-      const response = await api.put('transactions', {
+    async (data: UpdateTransactionProps) => {
+      const response = await api.put(`transactions/${data.id}`, {
         ...data,
       })
 
@@ -96,6 +108,7 @@ export function TransactionsProvider({ children }: TransactionsProviderProps) {
         quantityTransactions,
         deleteTransactions,
         UpdateTransactions,
+        getID,
       }}
     >
       {children}
