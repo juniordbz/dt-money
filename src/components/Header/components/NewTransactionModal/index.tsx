@@ -12,6 +12,7 @@ import { Controller, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { TransactionsContext } from '../../../../contexts/TransactionsContext'
 import { useContextSelector } from 'use-context-selector'
+import { ModalContext } from '../../../../contexts/ModalContext'
 
 const newTransitionFormSchema = z.object({
   description: z.string(),
@@ -20,15 +21,41 @@ const newTransitionFormSchema = z.object({
   type: z.enum(['income', 'outcome']),
 })
 
-type newTransactionFormInput = z.infer<typeof newTransitionFormSchema>
+export type newTransactionFormInput = z.infer<typeof newTransitionFormSchema>
 
 export function NewTransactionModal() {
+  const closeModalTransaction = useContextSelector(ModalContext, (context) => {
+    return context.closeModalNewTransaction
+  })
+
+  const controlUpdateTransaction = useContextSelector(
+    ModalContext,
+    (context) => {
+      return context.controlUpdateTransaction
+    },
+  )
+
+  const handleControlUpdateTransacion = useContextSelector(
+    ModalContext,
+    (context) => {
+      return context.handleControlUpdateTransacion
+    },
+  )
+
   const createTransactions = useContextSelector(
     TransactionsContext,
     (context) => {
       return context.createTransactions
     },
   )
+
+  const UpdateTransactions = useContextSelector(
+    TransactionsContext,
+    (context) => {
+      return context.UpdateTransactions
+    },
+  )
+
   const {
     control,
     register,
@@ -43,15 +70,17 @@ export function NewTransactionModal() {
     await createTransactions({
       ...data,
     })
+
     reset()
+    closeModalTransaction()
   }
 
   return (
     <Dialog.Portal>
-      <Overlay />
+      <Overlay onClick={closeModalTransaction} />
       <Content>
         <Dialog.Title>Nova Transação</Dialog.Title>
-        <CloseButton>
+        <CloseButton onClick={closeModalTransaction}>
           <X size={24} />
         </CloseButton>
         <form onSubmit={handleSubmit(handleCreateNewTransaction)}>
@@ -61,6 +90,7 @@ export function NewTransactionModal() {
             required
             {...register('description')}
           />
+
           <input
             type="number"
             placeholder="Preço"
@@ -96,8 +126,12 @@ export function NewTransactionModal() {
             }}
           />
 
-          <button type="submit" disabled={isSubmitting}>
-            Cadastrar
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            onClick={() => handleControlUpdateTransacion(false)}
+          >
+            {controlUpdateTransaction === false ? 'Cadastrar' : 'Atualizar'}
           </button>
         </form>
       </Content>
