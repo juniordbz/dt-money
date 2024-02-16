@@ -21,11 +21,11 @@ export const Content = styled(Dialog.Content)`
   transform: translate(-50%, -50%);
 
   @media screen and (max-width: 991px) {
-    position: absolute;
+    top: auto;
+    bottom: 0;
     left: 0;
-    bottom: -50%;
     min-width: 100%;
-    transform: translate(0, -20%);
+    transform: translate(0, 0);
   }
 
   form {

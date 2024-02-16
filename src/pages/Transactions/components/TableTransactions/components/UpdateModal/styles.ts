@@ -9,7 +9,7 @@ export const Overlay = styled(Dialog.Overlay)`
   background: rgba(0, 0, 0, 0.75);
 `
 export const Content = styled(Dialog.Content)`
-  min-width: 32rem;
+  max-width: 32rem;
   border-radius: 6px;
   padding: 2.5rem 3rem;
   background: ${({ theme }) => theme['gray-800']};
@@ -27,17 +27,32 @@ export const Content = styled(Dialog.Content)`
   }
 
   @media screen and (max-width: 991px) {
-    position: absolute;
-    left: 0;
+    top: auto;
     bottom: 0;
+    left: 0;
     min-width: 100%;
-    transform: translate(0, 50%);
+    transform: translate(0, 0);
+
+    > div {
+      flex-direction: column;
+      gap: 0;
+    }
   }
+`
+export const CloseButton = styled(Dialog.Close)`
+  position: absolute;
+  background: transparent;
+  border: 0;
+  top: 1.5rem;
+  right: 1.5rem;
+  line-height: 0;
+  cursor: pointer;
+  color: ${({ theme }) => theme['gray-500']};
 `
 
 export const ActionButton = styled.button`
   height: 58px;
-  width: 100px;
+  width: 100%;
   border: 0;
   background: ${({ theme }) => theme['green-500']};
   color: ${({ theme }) => theme.white};
@@ -55,5 +70,9 @@ export const ActionButton = styled.button`
   &:not(:disabled):hover {
     background: ${({ theme }) => theme['green-700']};
     transition: background-color 0.2s;
+  }
+
+  @media screen and (max-width: 991px) {
+    width: 100%;
   }
 `

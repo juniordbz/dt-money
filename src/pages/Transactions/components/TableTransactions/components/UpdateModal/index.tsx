@@ -1,14 +1,16 @@
 import * as Dialog from '@radix-ui/react-dialog'
-import { ActionButton, Content, Overlay } from './styles'
+import { ActionButton, CloseButton, Content, Overlay } from './styles'
 import { NewTransactionModal } from '../../../../../../components/NewTransactionModal'
 import { useContextSelector } from 'use-context-selector'
 import { TransactionsContext } from '../../../../../../contexts/TransactionsContext'
+import { X } from 'phosphor-react'
 
 interface UpdateModalProps {
   id: number
+  closeModal: () => void
 }
 
-export function UpdateModal({ id }: UpdateModalProps) {
+export function UpdateModal({ id, closeModal }: UpdateModalProps) {
   const deleteTransactions = useContextSelector(
     TransactionsContext,
     (context) => {
@@ -16,22 +18,28 @@ export function UpdateModal({ id }: UpdateModalProps) {
     },
   )
 
-  function handleDeleteById(id: number) {
-    console.log(id)
-    deleteTransactions(id)
-  }
-
   return (
     <Dialog.Portal>
       <Overlay />
       <Content>
+        <CloseButton>
+          <X size={24} />
+        </CloseButton>
+
         <Dialog.Title>O que você deseja fazer com essa transação?</Dialog.Title>
+
         <Dialog.Root>
           <div>
             <Dialog.Trigger asChild>
-              <ActionButton>Editar</ActionButton>
+              <ActionButton onClick={() => closeModal()}>Editar</ActionButton>
             </Dialog.Trigger>
-            <ActionButton onClick={() => handleDeleteById(id)}>
+
+            <ActionButton
+              onClick={() => {
+                deleteTransactions(id)
+                closeModal()
+              }}
+            >
               Deletar
             </ActionButton>
           </div>

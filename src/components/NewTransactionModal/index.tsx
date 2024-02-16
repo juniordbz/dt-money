@@ -16,6 +16,7 @@ import { useContextSelector } from 'use-context-selector'
 interface NewTransactionsModalProps {
   variant: 'Cadastrar' | 'Atualizar'
   title: string
+  closeModal?: () => void
 }
 
 const newTransitionFormSchema = z.object({
@@ -30,6 +31,7 @@ export type newTransactionFormInput = z.infer<typeof newTransitionFormSchema>
 export function NewTransactionModal({
   variant,
   title,
+  closeModal,
 }: NewTransactionsModalProps) {
   const createTransactions = useContextSelector(
     TransactionsContext,
@@ -54,6 +56,7 @@ export function NewTransactionModal({
     })
 
     reset()
+    closeModal()
   }
 
   return (

@@ -14,12 +14,13 @@ import * as Dialog from '@radix-ui/react-dialog'
 import { UpdateModal } from './components/UpdateModal'
 
 export function TableTransactions() {
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth)
+  const [open, setOpen] = useState(false)
   const [id, setId] = useState(0)
+
   const transactions = useContextSelector(TransactionsContext, (context) => {
     return context.transactions
   })
-
-  const [screenWidth, setScreenWidth] = useState(window.innerWidth)
 
   useEffect(() => {
     const handleResize = () => {
@@ -37,8 +38,12 @@ export function TableTransactions() {
     setId(id)
   }
 
+  function closeModal() {
+    setOpen(false)
+  }
+
   return (
-    <Dialog.Root>
+    <Dialog.Root open={open} onOpenChange={setOpen}>
       <TableTransactionsContainer className="layoutContainer">
         {screenWidth <= 768 ? (
           <div>
@@ -102,7 +107,7 @@ export function TableTransactions() {
           </TransactionsTable>
         )}
       </TableTransactionsContainer>
-      <UpdateModal id={id} />
+      <UpdateModal id={id} closeModal={closeModal} />
     </Dialog.Root>
   )
 }
