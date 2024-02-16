@@ -14,6 +14,7 @@ import * as Dialog from '@radix-ui/react-dialog'
 import { UpdateModal } from './components/UpdateModal'
 
 export function TableTransactions() {
+  const [id, setId] = useState(0)
   const transactions = useContextSelector(TransactionsContext, (context) => {
     return context.transactions
   })
@@ -32,6 +33,10 @@ export function TableTransactions() {
     }
   }, [])
 
+  function getId(id: number) {
+    setId(id)
+  }
+
   return (
     <Dialog.Root>
       <TableTransactionsContainer className="layoutContainer">
@@ -39,7 +44,11 @@ export function TableTransactions() {
           <div>
             {transactions.map((transaction) => {
               return (
-                <Dialog.Trigger asChild key={transaction.id}>
+                <Dialog.Trigger
+                  asChild
+                  key={transaction.id}
+                  onClick={() => getId(transaction.id)}
+                >
                   <CardContainer>
                     <div>
                       <p>{transaction.description}</p>
@@ -68,7 +77,11 @@ export function TableTransactions() {
             <tbody>
               {transactions.map((transaction) => {
                 return (
-                  <Dialog.Trigger asChild key={transaction.id}>
+                  <Dialog.Trigger
+                    asChild
+                    key={transaction.id}
+                    onClick={() => getId(transaction.id)}
+                  >
                     <tr>
                       <td width="50%">{transaction.description}</td>
                       <td>
@@ -89,7 +102,7 @@ export function TableTransactions() {
           </TransactionsTable>
         )}
       </TableTransactionsContainer>
-      <UpdateModal />
+      <UpdateModal id={id} />
     </Dialog.Root>
   )
 }

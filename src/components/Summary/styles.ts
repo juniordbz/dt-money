@@ -38,5 +38,12 @@ export const SummaryCard = styled.div<SumarryCardProps>`
     variant === 'green' &&
     css`
       background-color: ${theme['green-700']};
+      @media screen and (max-width: 991px) {
+        min-width: 280px;
+      }
     `}
+
+  @media screen and (max-width: 991px) {
+    min-width: 280px;
+  }
 `

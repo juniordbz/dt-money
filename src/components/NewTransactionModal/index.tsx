@@ -10,8 +10,13 @@ import { ArrowCircleDown, ArrowCircleUp, X } from 'phosphor-react'
 import * as z from 'zod'
 import { Controller, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { TransactionsContext } from '../../../../contexts/TransactionsContext'
+import { TransactionsContext } from '../../contexts/TransactionsContext'
 import { useContextSelector } from 'use-context-selector'
+
+interface NewTransactionsModalProps {
+  variant: 'Cadastrar' | 'Atualizar'
+  title: string
+}
 
 const newTransitionFormSchema = z.object({
   description: z.string(),
@@ -22,7 +27,10 @@ const newTransitionFormSchema = z.object({
 
 export type newTransactionFormInput = z.infer<typeof newTransitionFormSchema>
 
-export function NewTransactionModal() {
+export function NewTransactionModal({
+  variant,
+  title,
+}: NewTransactionsModalProps) {
   const createTransactions = useContextSelector(
     TransactionsContext,
     (context) => {
@@ -52,7 +60,7 @@ export function NewTransactionModal() {
     <Dialog.Portal>
       <Overlay />
       <Content>
-        <Dialog.Title>Nova Transação</Dialog.Title>
+        <Dialog.Title>{title}</Dialog.Title>
         <CloseButton>
           <X size={24} />
         </CloseButton>
@@ -100,7 +108,7 @@ export function NewTransactionModal() {
           />
 
           <button type="submit" disabled={isSubmitting}>
-            Cadastrar
+            {variant}
           </button>
         </form>
       </Content>

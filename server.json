@@ -1,12 +1,60 @@
 {
   "transactions": [
     {
-      "description": "sdfg",
-      "price": 2,
-      "category": "232",
-      "type": "income",
-      "createdAt": "2024-02-15T22:12:21.323Z",
+      "description": "asdf",
+      "price": 312,
+      "category": "3123",
+      "type": "outcome",
+      "createdAt": "2024-02-16T02:22:38.617Z",
       "id": 1
+    },
+    {
+      "description": "3123",
+      "price": 12321,
+      "category": "123123",
+      "type": "outcome",
+      "createdAt": "2024-02-16T02:22:46.560Z",
+      "id": 2
+    },
+    {
+      "description": "12312",
+      "price": 1312,
+      "category": "1231",
+      "type": "income",
+      "createdAt": "2024-02-16T02:22:50.627Z",
+      "id": 3
+    },
+    {
+      "description": "1232",
+      "price": 1231,
+      "category": "12312",
+      "type": "outcome",
+      "createdAt": "2024-02-16T02:23:07.460Z",
+      "id": 4
+    },
+    {
+      "description": "321312",
+      "price": 312,
+      "category": "312",
+      "type": "income",
+      "createdAt": "2024-02-16T02:23:13.035Z",
+      "id": 5
+    },
+    {
+      "description": "1231",
+      "price": 3123,
+      "category": "123",
+      "type": "outcome",
+      "createdAt": "2024-02-16T02:23:21.439Z",
+      "id": 6
+    },
+    {
+      "description": "3213",
+      "price": 3123,
+      "category": "3123",
+      "type": "outcome",
+      "createdAt": "2024-02-16T02:23:32.965Z",
+      "id": 7
     }
   ]
 }
