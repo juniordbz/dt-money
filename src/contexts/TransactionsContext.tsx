@@ -2,7 +2,7 @@ import { ReactNode, useState, useCallback, useEffect } from 'react'
 import { api } from '../lib/axios'
 import { createContext } from 'use-context-selector'
 
-interface Transactions {
+export interface Transactions {
   id: number
   description: string
   type: 'income' | 'outcome'
@@ -15,7 +15,7 @@ interface TransactionsProviderProps {
   children: ReactNode
 }
 
-interface CreateNewTransactionProps {
+export interface CreateNewTransactionProps {
   description: string
   type: 'income' | 'outcome'
   price: number
@@ -28,6 +28,10 @@ interface TransactionsContextType {
   createTransactions: (data: CreateNewTransactionProps) => Promise<void>
   deleteTransactions: (id: number) => Promise<void>
   quantityTransactions: number
+  updateTransactions: (
+    id: number,
+    data: CreateNewTransactionProps,
+  ) => Promise<void>
 }
 
 export const TransactionsContext = createContext({} as TransactionsContextType)
@@ -60,15 +64,21 @@ export function TransactionsProvider({ children }: TransactionsProviderProps) {
     [],
   )
 
+  const updateTransactions = useCallback(
+    async (id: number, dataUpdate: CreateNewTransactionProps) => {
+      await api.patch(`transactions/${id}`, dataUpdate)
+      fetchTransactions()
+    },
+
+    [fetchTransactions],
+  )
+
   const deleteTransactions = useCallback(
     async (id: number) => {
       await api.delete(`transactions/${id}`)
-
-      setTransactions(
-        transactions.filter((transaction) => transaction.id !== id),
-      )
+      fetchTransactions()
     },
-    [transactions],
+    [fetchTransactions],
   )
 
   useEffect(() => {
@@ -83,6 +93,7 @@ export function TransactionsProvider({ children }: TransactionsProviderProps) {
         createTransactions,
         quantityTransactions,
         deleteTransactions,
+        updateTransactions,
       }}
     >
       {children}

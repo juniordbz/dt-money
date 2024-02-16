@@ -1,20 +1,12 @@
 {
   "transactions": [
     {
-      "description": "adsfasd",
-      "price": 121,
-      "category": "212",
-      "type": "outcome",
-      "createdAt": "2024-02-16T02:54:00.303Z",
-      "id": 1
-    },
-    {
-      "description": "dsa",
-      "price": 12,
+      "description": "eqw",
+      "price": 21,
       "category": "12",
       "type": "income",
-      "createdAt": "2024-02-16T02:54:06.184Z",
-      "id": 2
+      "createdAt": "2024-02-16T18:41:45.593Z",
+      "id": 1
     }
   ]
 }
