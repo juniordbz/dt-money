@@ -28,10 +28,10 @@ export const Content = styled(Dialog.Content)`
 
   @media screen and (max-width: 991px) {
     position: absolute;
-    bottom: -25%;
-    right: 0;
+    left: 0;
+    bottom: 0;
     min-width: 100%;
-    height: auto;
+    transform: translate(0, 50%);
   }
 `
 
