@@ -1,7 +1,10 @@
 import * as Dialog from '@radix-ui/react-dialog'
 import { useState, useEffect } from 'react'
 import { useContextSelector } from 'use-context-selector'
-import { TransactionsContext } from '../../../../../../contexts/TransactionsContext'
+import {
+  Transactions,
+  TransactionsContext,
+} from '../../../../../../contexts/TransactionsContext'
 import { TransactionDesktopItem } from './components/TransactionDesktopItem'
 import { TransactionMobileItem } from './components/TransactionMobileItem'
 import { UpdateModal } from '../UpdateModal'
@@ -10,6 +13,14 @@ import { NewTransactionModal } from '../../../../../../components/NewTransaction
 export function TransactionItem() {
   const [open, setOpen] = useState(false)
   const [openModalNewTransaction, setOpenModalNewTransaction] = useState(false)
+  const [updateTransaction, setUpdateTransaction] = useState<Transactions>({
+    id: 0,
+    description: '',
+    type: 'income',
+    price: 0,
+    category: '',
+    createdAt: '',
+  })
 
   const [screenWidth, setScreenWidth] = useState(window.innerWidth)
 
@@ -41,16 +52,19 @@ export function TransactionItem() {
       {transactions.map((transaction) => {
         return (
           <>
-            <Dialog.Root
-              open={open}
-              onOpenChange={setOpen}
-              key={transaction.id}
-            >
-              <Dialog.Trigger asChild>
+            <Dialog.Root open={open} onOpenChange={setOpen}>
+              <Dialog.Trigger
+                asChild
+                onClick={() => setUpdateTransaction(transaction)}
+              >
                 {screenWidth <= 768 ? (
-                  <TransactionMobileItem transaction={transaction} />
+                  <div>
+                    <TransactionMobileItem transaction={transaction} />
+                  </div>
                 ) : (
-                  <TransactionDesktopItem transaction={transaction} />
+                  <div>
+                    <TransactionDesktopItem transaction={transaction} />
+                  </div>
                 )}
               </Dialog.Trigger>
               <UpdateModal
@@ -72,7 +86,7 @@ export function TransactionItem() {
               <NewTransactionModal
                 title="Atualizar Transação"
                 variant="Atualizar"
-                dataUpdate={transaction}
+                dataUpdate={updateTransaction}
                 closeModal={() => setOpenModalNewTransaction(false)}
               />
             </Dialog.Root>

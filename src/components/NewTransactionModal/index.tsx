@@ -81,6 +81,8 @@ export function NewTransactionModal({
     }
   }
 
+  console.log(dataUpdate)
+
   useEffect(() => {
     if (variant === 'Atualizar') {
       setValue('description', dataUpdate?.description)
