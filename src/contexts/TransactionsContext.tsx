@@ -54,7 +54,7 @@ export function TransactionsProvider({ children }: TransactionsProviderProps) {
 
   const createTransactions = useCallback(
     async (data: CreateNewTransactionProps) => {
-      const response = await api.post('transactions', {
+      const response = await api.post('/transactions', {
         ...data,
         createdAt: new Date(),
       })
@@ -66,7 +66,7 @@ export function TransactionsProvider({ children }: TransactionsProviderProps) {
 
   const updateTransactions = useCallback(
     async (id: number, dataUpdate: CreateNewTransactionProps) => {
-      await api.patch(`transactions/${id}`, dataUpdate)
+      await api.patch(`/transactions/${id}`, dataUpdate)
       fetchTransactions()
     },
 
@@ -75,7 +75,7 @@ export function TransactionsProvider({ children }: TransactionsProviderProps) {
 
   const deleteTransactions = useCallback(
     async (id: number) => {
-      await api.delete(`transactions/${id}`)
+      await api.delete(`/transactions/${id}`)
       fetchTransactions()
     },
     [fetchTransactions],
