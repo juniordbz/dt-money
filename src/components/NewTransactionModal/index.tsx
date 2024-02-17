@@ -37,7 +37,14 @@ export function NewTransactionModal({
   variant,
   title,
   closeModal,
-  dataUpdate,
+  dataUpdate = {
+    id: 0,
+    category: '',
+    description: '',
+    createdAt: '',
+    price: 0,
+    type: 'income',
+  },
 }: NewTransactionsModalProps) {
   const createTransactions = useContextSelector(
     TransactionsContext,

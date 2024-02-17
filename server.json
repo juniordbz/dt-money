@@ -1,3 +1,12 @@
 {
-  "transactions": []
+  "transactions": [
+    {
+      "description": "tes",
+      "price": 12,
+      "category": "12",
+      "type": "outcome",
+      "createdAt": "2024-02-17T21:41:46.951Z",
+      "id": 3
+    }
+  ]
 }

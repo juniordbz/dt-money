@@ -1,4 +1,0 @@
-{
-  "version": 2,
-  "ignore": ["node_modules", "**/*.ts"]
-}
