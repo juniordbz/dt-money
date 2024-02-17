@@ -11,18 +11,11 @@ import * as z from 'zod'
 import { Controller, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import {
-  CreateNewTransactionProps,
+  Transactions,
   TransactionsContext,
 } from '../../contexts/TransactionsContext'
 import { useContextSelector } from 'use-context-selector'
-import { useEffect, useState } from 'react'
-
-interface NewTransactionsModalProps {
-  variant: 'Cadastrar' | 'Atualizar'
-  title: string
-  closeModal?: () => void
-  id?: number
-}
+import { useEffect } from 'react'
 
 const newTransitionFormSchema = z.object({
   description: z.string(),
@@ -33,20 +26,19 @@ const newTransitionFormSchema = z.object({
 
 export type newTransactionFormInput = z.infer<typeof newTransitionFormSchema>
 
+interface NewTransactionsModalProps {
+  variant: 'Cadastrar' | 'Atualizar'
+  title: string
+  closeModal?: () => void
+  dataUpdate?: Transactions
+}
+
 export function NewTransactionModal({
   variant,
   title,
   closeModal,
-  id,
+  dataUpdate,
 }: NewTransactionsModalProps) {
-  const [updateTransaction, setUpdateTransaction] =
-    useState<CreateNewTransactionProps>({
-      description: '',
-      price: 0,
-      category: '',
-      type: 'income',
-    })
-
   const createTransactions = useContextSelector(
     TransactionsContext,
     (context) => {
@@ -54,9 +46,6 @@ export function NewTransactionModal({
     },
   )
 
-  const transactions = useContextSelector(TransactionsContext, (context) => {
-    return context.transactions
-  })
   const updateTransactions = useContextSelector(
     TransactionsContext,
     (context) => {
@@ -80,12 +69,11 @@ export function NewTransactionModal({
       await createTransactions({
         ...data,
       })
-    } else if (id !== undefined) {
-      await updateTransactions(id, {
+    } else {
+      await updateTransactions(dataUpdate.id, {
         ...data,
       })
     }
-
     reset()
 
     if (closeModal) {
@@ -93,25 +81,14 @@ export function NewTransactionModal({
     }
   }
 
-  function UpdateTransactionFind() {
-    const newUpdateTransaction = transactions.find(
-      (transaction) => transaction.id === id,
-    )
-
-    if (newUpdateTransaction) {
-      setUpdateTransaction(newUpdateTransaction)
-    }
-  }
-
   useEffect(() => {
     if (variant === 'Atualizar') {
-      UpdateTransactionFind()
-      setValue('description', updateTransaction?.description)
-      setValue('price', updateTransaction?.price)
-      setValue('category', updateTransaction?.category)
-      setValue('type', updateTransaction?.type)
+      setValue('description', dataUpdate?.description)
+      setValue('price', dataUpdate?.price)
+      setValue('category', dataUpdate?.category)
+      setValue('type', dataUpdate?.type)
     }
-  }, [setValue, updateTransaction, variant])
+  }, [setValue, dataUpdate, variant])
 
   return (
     <Dialog.Portal>

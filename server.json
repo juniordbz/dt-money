@@ -1,12 +1,20 @@
 {
   "transactions": [
     {
-      "description": "eqw",
-      "price": 21,
-      "category": "12",
+      "description": "212",
+      "price": 2121,
+      "category": "212",
+      "type": "outcome",
+      "createdAt": "2024-02-17T02:48:12.775Z",
+      "id": 2
+    },
+    {
+      "description": "888",
+      "price": 8,
+      "category": "8",
       "type": "income",
-      "createdAt": "2024-02-16T18:41:45.593Z",
-      "id": 1
+      "createdAt": "2024-02-17T02:59:52.903Z",
+      "id": 3
     }
   ]
 }
