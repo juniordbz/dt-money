@@ -54,29 +54,66 @@ export function TransactionsProvider({ children }: TransactionsProviderProps) {
 
   const createTransactions = useCallback(
     async (data: CreateNewTransactionProps) => {
-      const response = await api.post('/transactions', {
-        ...data,
-        createdAt: new Date(),
-      })
+      try {
+        // Realizar a requisição POST para criar a transação
+        const response = await api.post('/transactions', {
+          ...data,
+          createdAt: new Date().toISOString(), // Ajustar a data para ser uma string ISO
+        })
 
-      setTransactions((state) => [response.data, ...state])
+        // Atualizar o estado local com a nova transação retornada pela API
+        setTransactions((prevTransactions) => [
+          response.data,
+          ...prevTransactions,
+        ])
+        fetchTransactions()
+      } catch (error) {
+        console.error('Erro ao criar transação:', error)
+        // Em caso de erro, não atualizar o estado local
+        fetchTransactions()
+      }
     },
-    [],
+    [fetchTransactions],
   )
 
   const updateTransactions = useCallback(
     async (id: number, dataUpdate: CreateNewTransactionProps) => {
-      await api.patch(`/transactions/${id}`, dataUpdate)
-      fetchTransactions()
-    },
+      // Atualizando localmente de forma otimista
+      setTransactions((prevTransactions) =>
+        prevTransactions.map((transaction) =>
+          transaction.id === id
+            ? { ...transaction, ...dataUpdate }
+            : transaction,
+        ),
+      )
 
+      try {
+        await api.patch(`/transactions/${id}`, dataUpdate)
+        fetchTransactions()
+      } catch (error) {
+        console.error('Erro ao atualizar transação:', error)
+        // Em caso de erro, reverter o estado local
+        fetchTransactions() // Recarregando os dados da API para refletir o estado atual
+      }
+    },
     [fetchTransactions],
   )
 
   const deleteTransactions = useCallback(
     async (id: number) => {
-      await api.delete(`/transactions/${id}`)
-      fetchTransactions()
+      // Removendo localmente de forma otimista
+      setTransactions((prevTransactions) =>
+        prevTransactions.filter((transaction) => transaction.id !== id),
+      )
+
+      try {
+        await api.delete(`/transactions/${id}`)
+        fetchTransactions()
+      } catch (error) {
+        console.error('Erro ao excluir transação:', error)
+        // Em caso de erro, recarregar os dados da API para refletir o estado atual
+        fetchTransactions()
+      }
     },
     [fetchTransactions],
   )

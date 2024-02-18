@@ -1,12 +1,12 @@
 {
   "transactions": [
     {
-      "description": "tes",
-      "price": 12,
-      "category": "12",
-      "type": "outcome",
+      "description": "Desenvolvimento site",
+      "price": 15000,
+      "category": "Trabalho",
+      "type": "income",
       "createdAt": "2024-02-17T21:41:46.951Z",
-      "id": 3
+      "id": 1
     }
   ]
 }

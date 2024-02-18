@@ -69,7 +69,7 @@ export function TransactionItem() {
               </Dialog.Trigger>
               <UpdateModal
                 onDelete={() => {
-                  deleteTransactions(transaction.id)
+                  deleteTransactions(updateTransaction.id)
                   setOpen(false)
                 }}
                 onEdit={() => {

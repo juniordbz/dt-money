@@ -81,6 +81,7 @@ export function NewTransactionModal({
         ...data,
       })
     }
+
     reset()
 
     if (closeModal) {
