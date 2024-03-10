@@ -15,7 +15,7 @@ import {
   TransactionsContext,
 } from '../../contexts/TransactionsContext'
 import { useContextSelector } from 'use-context-selector'
-import { useEffect } from 'react'
+import { PriceInput } from './components/PriceInput'
 
 const newTransitionFormSchema = z.object({
   description: z.string(),
@@ -37,14 +37,7 @@ export function NewTransactionModal({
   variant,
   title,
   closeModal,
-  dataUpdate = {
-    id: 0,
-    category: '',
-    description: '',
-    createdAt: '',
-    price: 0,
-    type: 'income',
-  },
+  dataUpdate,
 }: NewTransactionsModalProps) {
   const createTransactions = useContextSelector(
     TransactionsContext,
@@ -65,21 +58,22 @@ export function NewTransactionModal({
     register,
     handleSubmit,
     reset,
-    setValue,
     formState: { isSubmitting },
   } = useForm<newTransactionFormInput>({
     resolver: zodResolver(newTransitionFormSchema),
+    values: {
+      description: dataUpdate?.description ?? '',
+      price: dataUpdate?.price ?? 0,
+      category: dataUpdate?.category ?? '',
+      type: dataUpdate?.type ?? 'income',
+    },
   })
 
   async function handleTransaction(data: newTransactionFormInput) {
     if (variant === 'Cadastrar') {
-      await createTransactions({
-        ...data,
-      })
+      await createTransactions({ ...data })
     } else {
-      await updateTransactions(dataUpdate.id, {
-        ...data,
-      })
+      await updateTransactions(dataUpdate?.id, { ...data })
     }
 
     reset()
@@ -88,17 +82,6 @@ export function NewTransactionModal({
       closeModal()
     }
   }
-
-  console.log(dataUpdate)
-
-  useEffect(() => {
-    if (variant === 'Atualizar') {
-      setValue('description', dataUpdate?.description)
-      setValue('price', dataUpdate?.price)
-      setValue('category', dataUpdate?.category)
-      setValue('type', dataUpdate?.type)
-    }
-  }, [setValue, dataUpdate, variant])
 
   return (
     <Dialog.Portal>
@@ -115,13 +98,20 @@ export function NewTransactionModal({
             required
             {...register('description')}
           />
-
-          <input
-            type="number"
-            placeholder="Preço"
-            required
-            {...register('price', { valueAsNumber: true })}
+          <Controller
+            name="price"
+            control={control}
+            render={({ field: { name, onChange, value } }) => {
+              return (
+                <PriceInput
+                  name={name}
+                  onValueChange={onChange}
+                  value={value}
+                />
+              )
+            }}
           />
+
           <input
             type="text"
             placeholder="Categoria"

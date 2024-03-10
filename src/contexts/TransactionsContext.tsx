@@ -29,7 +29,7 @@ interface TransactionsContextType {
   deleteTransactions: (id: number) => Promise<void>
   quantityTransactions: number
   updateTransactions: (
-    id: number,
+    id: number | undefined,
     data: CreateNewTransactionProps,
   ) => Promise<void>
 }
@@ -77,7 +77,7 @@ export function TransactionsProvider({ children }: TransactionsProviderProps) {
   )
 
   const updateTransactions = useCallback(
-    async (id: number, dataUpdate: CreateNewTransactionProps) => {
+    async (id: number | undefined, dataUpdate: CreateNewTransactionProps) => {
       // Atualizando localmente de forma otimista
       setTransactions((prevTransactions) =>
         prevTransactions.map((transaction) =>
