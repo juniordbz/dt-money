@@ -1,30 +1,34 @@
-# React + TypeScript + Vite
+# DT Money
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este é um projeto de controle financeiro desenvolvido para registrar entradas e saídas. Utiliza um servidor JSON para armazenamento de dados, e foi construído com as seguintes tecnologias: Radix UI, Axios, React Router DOM, React Hook Form, Zod, Context Selector, Styled Components, Vite e TypeScript.
 
-Currently, two official plugins are available:
+## Principais Características
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Registro de Entradas e Saídas Financeiras:** Permite aos usuários registrar e editar suas transações financeiras, facilitando o acompanhamento de suas finanças.
+- **Tecnologias Modernas:** Utiliza tecnologias modernas como React, TypeScript e CSS Modules para garantir um desenvolvimento eficiente e uma experiência de usuário agradável.
+- **Validação de Formulários:** Utiliza React Hook Form e Zod para validar e garantir a integridade dos dados inseridos pelo usuário.
+- **Otimização de Renderização:** O uso de Context Selector ajuda a otimizar a renderização da aplicação, proporcionando uma experiência mais fluída ao usuário.
+- **Estilo Modular com Styled Components:** Organiza o estilo da aplicação de forma modular utilizando Styled Components, facilitando a manutenção e evitando conflitos de estilo.
+- **Responsividade:** O layout foi desenvolvido com responsividade em mente, garantindo uma experiência consistente em diferentes dispositivos e tamanhos de tela.
 
-## Expanding the ESLint configuration
+## Tecnologias Utilizadas
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- React
+- TypeScript
+- Radix UI
+- Axios
+- React Router DOM
+- React Hook Form
+- Zod
+- Context Selector
+- Styled Components
+- Vite
 
-- Configure the top-level `parserOptions` property like this:
+## Como Executar o Projeto
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+1. Clone o repositório.
+2. Acesse o diretório do projeto.
+3. Instale as dependências utilizando um gerenciador de pacotes de sua escolha (npm ou yarn).
+4. Inicie a aplicação utilizando o comando `npm run dev`.
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Este projeto oferece uma solução abrangente para o gerenciamento de finanças pessoais, incorporando tecnologias modernas para garantir uma experiência de usuário suave e uma implementação robusta e eficiente.
