@@ -1,6 +1,6 @@
 # DT Money
 
-Este é um projeto de controle financeiro desenvolvido para registrar entradas e saídas. Utiliza um servidor JSON para armazenamento de dados, e foi construído com as seguintes tecnologias: Radix UI, Axios, React Router DOM, React Hook Form, Zod, Context Selector, Styled Components, Vite e TypeScript.
+Este é um projeto de controle financeiro desenvolvido para registrar entradas e saídas. Utiliza um servidor JSON para armazenamento de dados.
 
 ## Principais Características
 
@@ -15,6 +15,7 @@ Este é um projeto de controle financeiro desenvolvido para registrar entradas e
 
 - React
 - TypeScript
+- JSON Server
 - Radix UI
 - Axios
 - React Router DOM
